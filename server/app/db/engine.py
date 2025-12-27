@@ -1,5 +1,6 @@
 from sqlmodel import SQLModel, create_engine
 import os
+from app.db.models import Job, GenerationJob
 
 # Ensure data directory exists
 os.makedirs("data", exist_ok=True)

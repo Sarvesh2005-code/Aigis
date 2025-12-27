@@ -4,12 +4,17 @@ services:
     env: python
     plan: free
     buildCommand: "./build.sh"
-    startCommand: "cd server && python -m uvicorn app.main:app --host 0.0.0.0 --port 10000"
+    startCommand: "cd server && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
       - key: DATABASE_URL
-        value: sqlite:///data/aigis.db
+        value: sqlite:///data/nexus.db
+      - key: RENDER_URL
+        fromService:
+          type: web
+          name: aigis-core
+          property: host
     disk:
       name: aigis-data
       mountPath: /app/server/data
